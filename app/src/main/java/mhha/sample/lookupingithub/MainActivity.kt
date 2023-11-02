@@ -27,11 +27,11 @@ class MainActivity : AppCompatActivity() {
     private lateinit var userAdapter:UserAdapter
     private var searchFor: String = ""
 
-    //레트로핏 설정
-    private val retrofit = Retrofit.Builder()
-        .baseUrl("https://api.github.com/")
-        .addConverterFactory(GsonConverterFactory.create())
-        .build()
+//    //레트로핏 설정
+//    private val retrofit = Retrofit.Builder()
+//        .baseUrl("https://api.github.com/")
+//        .addConverterFactory(GsonConverterFactory.create())
+//        .build()
     private var handler = Handler(Looper.getMainLooper())
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -74,7 +74,7 @@ class MainActivity : AppCompatActivity() {
     } //override fun onCreate(savedInstanceState: Bundle?)
 
     private fun searchUser(query:String){
-        val githubService = retrofit.create(GithubService::class.java)
+        val githubService = ApiClient.retrofit.create(GithubService::class.java)
         githubService.searchUsers(query).enqueue(object : Callback<UserDto>{
             override fun onResponse(call: Call<UserDto>, response: Response<UserDto>) {
                 Log.e("LGH_info", "Search User :${ response.body().toString() }")
